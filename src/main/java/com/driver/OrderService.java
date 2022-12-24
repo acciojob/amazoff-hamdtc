@@ -120,4 +120,26 @@ public class OrderService {
         }
         return time;
     }
+
+    public void deletePartner(String partnerId) {
+
+        orderRepository.deliveryPartnerMap.remove(partnerId);
+        List<String> list= orderRepository.partnerToOrderMap.get(partnerId);
+        orderRepository.partnerToOrderMap.remove(partnerId);
+
+        for(String s:list){
+            orderRepository.orderToParterMap.put(s,null);
+        }
+
+    }
+
+    public void deleteOrder(String orderId) {
+        orderRepository.orderMap.remove(orderId);
+        String partner=orderRepository.orderToParterMap.get(orderId);
+        orderRepository.orderToParterMap.remove(orderId);
+
+        List<String> list=orderRepository.partnerToOrderMap.get(partner);
+        if(list.contains(partner)) list.remove(partner);
+        orderRepository.partnerToOrderMap.put(partner,list);
+    }
 }
