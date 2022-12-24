@@ -92,4 +92,32 @@ public class OrderService {
         }
         return count;
     }
+
+    public Integer getOrderLeftAfterTimeByPartner(String time, String partnerId) {
+        int count=0;
+        int t=Integer.parseInt(time.substring(0, 2)) * 60 + Integer.parseInt(time.substring(3, 5));
+        List<String> list=orderRepository.partnerToOrderMap.get(partnerId);
+        for(String s:list){
+            Order order=orderRepository.orderMap.get(s);
+            if(t<order.getDeliveryTime()) count++;
+        }
+        return count;
+    }
+
+    public String getTimeOfLastDelivery(String partnerId) {
+        List<String> list=orderRepository.partnerToOrderMap.get(partnerId);
+        int t=0;
+        for(String s:list){
+            Order order=orderRepository.orderMap.get(s);
+            if(t<order.getDeliveryTime()) t=order.getDeliveryTime();
+        }
+        String time="";
+        if (t>0){
+
+            int MM=t%60;
+            int HH=(t-MM)/60;
+            time=String.valueOf(HH)+":"+String.valueOf(MM);
+        }
+        return time;
+    }
 }
