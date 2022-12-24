@@ -123,31 +123,31 @@ public class OrderService {
 
     public void deletePartner(String partnerId) {
 
-       if(orderRepository.deliveryPartnerMap.containsKey(partnerId))
-           orderRepository.deliveryPartnerMap.remove(partnerId);
-       if(orderRepository.partnerToOrderMap.containsKey(partnerId)){
-            List<String> list = orderRepository.partnerToOrderMap.get(partnerId);
-            orderRepository.partnerToOrderMap.remove(partnerId);
-            for(String s:list){
-                orderRepository.orderToParterMap.put(s,null);
-            }
-        }
+//       if(orderRepository.deliveryPartnerMap.containsKey(partnerId))
+//           orderRepository.deliveryPartnerMap.remove(partnerId);
+//       if(orderRepository.partnerToOrderMap.containsKey(partnerId)){
+//            List<String> list = orderRepository.partnerToOrderMap.get(partnerId);
+//            orderRepository.partnerToOrderMap.remove(partnerId);
+//            for(String s:list){
+//                orderRepository.orderToParterMap.put(s,null);
+//            }
+//        }
 
 
     }
 
     public void deleteOrder(String orderId) {
 
-        if(orderRepository.orderMap.containsKey(orderId)) orderRepository.orderMap.remove(orderId);
-
-        String partner=orderRepository.orderToParterMap.get(orderId);
-
-        if(orderRepository.orderToParterMap.containsKey(orderId)) orderRepository.orderToParterMap.remove(orderId);
-
-        if(orderRepository.partnerToOrderMap.containsKey(partner)) {
-            List<String> list = orderRepository.partnerToOrderMap.get(partner);
-            if (list.contains(partner)) list.remove(partner);
-            orderRepository.partnerToOrderMap.put(partner, list);
-        }
+//        if(orderRepository.orderMap.containsKey(orderId)) orderRepository.orderMap.remove(orderId);
+//
+//        String partner=orderRepository.orderToParterMap.get(orderId);
+//
+//        if(orderRepository.orderToParterMap.containsKey(orderId)) orderRepository.orderToParterMap.remove(orderId);
+//
+//        if(orderRepository.partnerToOrderMap.containsKey(partner)) {
+//            List<String> list = orderRepository.partnerToOrderMap.get(partner);
+//            if (list.contains(partner)) list.remove(partner);
+//            orderRepository.partnerToOrderMap.put(partner, list);
+//        }
     }
 }
